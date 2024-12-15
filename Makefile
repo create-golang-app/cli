@@ -16,7 +16,7 @@ test: clean security critic
 	rm -rf ./tests
 
 install: test
-	CGO_ENABLED=0 go build -ldflags="-s -w" -o $(GOPATH)/bin/cgapp ./cmd/cgapp/main.go
+	CGO_ENABLED=0 go build -ldflags="-s -w" -o $(GOPATH)/bin/gocli ./cmd/gocli/main.go
 
 build: test
 	goreleaser --snapshot
@@ -26,16 +26,16 @@ release: test
 	goreleaser --snapshot
 
 build-and-push-images: test
-	docker build -t docker.io/koddr/cgapp:latest .
-	docker push docker.io/koddr/cgapp:latest
-	docker build -t docker.io/koddr/cgapp:$(VERSION) .
-	docker push docker.io/koddr/cgapp:$(VERSION)
-	docker image rm docker.io/koddr/cgapp:$(VERSION)
+	docker build -t docker.io/koddr/gocli:latest .
+	docker push docker.io/koddr/gocli:latest
+	docker build -t docker.io/koddr/gocli:$(VERSION) .
+	docker push docker.io/koddr/gocli:$(VERSION)
+	docker image rm docker.io/koddr/gocli:$(VERSION)
 
 update-pkg-cache:
-	curl -i https://proxy.golang.org/github.com/create-go-app/cli/v4/@v/v$(VERSION).info
+	curl -i https://proxy.golang.org/github.com/create-golang-app/cli/v4/@v/v$(VERSION).info
 
 delete-tag:
 	git tag --delete v$(VERSION)
-	docker image rm docker.io/koddr/cgapp:latest
-	docker image rm docker.io/koddr/cgapp:$(VERSION)
+	docker image rm docker.io/koddr/gocli:latest
+	docker image rm docker.io/koddr/gocli:$(VERSION)
