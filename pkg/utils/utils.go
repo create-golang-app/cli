@@ -1,6 +1,8 @@
 package utils
 
-import "github.com/mattn/go-colorable"
+import (
+	"github.com/mattn/go-colorable"
+)
 
 var (
 	Stdout = colorable.NewColorableStdout() // add a colorable std out

@@ -4,17 +4,31 @@
 package cmd
 
 import (
+	"github.com/AlecAivazis/survey/v2"
 	"github.com/create-golang-app/cli/pkg/registry"
 	"github.com/create-golang-app/cli/pkg/utils"
 	"github.com/spf13/cobra"
 )
 
 var (
-	useCustomTemplate bool // define custom templates
+	backend           string                 // define backend
+	useCustomTemplate bool                   // define custom templates
+	createAnswers     registry.CreateAnswers // define answers variable for `create` command
+
+	// Config for survey icons and colors.
+	// See: https://github.com/mgutz/ansi#style-format
+	surveyIconsConfig = func(icons *survey.IconSet) {
+		icons.Question.Format = "cyan"
+		icons.Question.Text = "[?]"
+		icons.Help.Format = "blue"
+		icons.Help.Text = "Help ->"
+		icons.Error.Format = "yellow"
+		icons.Error.Text = "Note ->"
+	}
 )
 
 var rootCmd = &cobra.Command{
-	Use:     "cgapp",
+	Use:     "gocli",
 	Version: registry.CLIVersion,
 	Short:   "A powerful CLI for the Create Go App project",
 	Long: `
