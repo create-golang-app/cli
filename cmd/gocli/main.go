@@ -8,7 +8,7 @@ frontend (JavaScript, TypeScript) and deploy automation
 Focus on writing your code and thinking of the business logic!
 The Create Go App CLI will take care of the rest.
 
-A helpful documentation and next steps -> https://github.com/create-go-app/cli
+A helpful documentation and next steps -> https://github.com/create-golang-app/cli
 
 # Copyright 2024 Vic Shóstak and Create Go App Contributors
 
@@ -27,6 +27,8 @@ limitations under the License.
 
 package main
 
-func main() {
+import "github.com/create-golang-app/cli/cmd"
 
+func main() {
+	cmd.Execute()
 }
